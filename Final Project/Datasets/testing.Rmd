@@ -1,0 +1,223 @@
+---
+title: "APPENDIX"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+heights<-vector()
+tpp<-vector()
+```
+
+```{r}
+st<-read.csv("stats.csv")
+n<-c(0, 0, 0, 0, 0, 0, 0, 0)
+sum<-c(0, 0, 0, 0, 0, 0, 0, 0)
+sheight<-c(0, 0, 0, 0, 0, 0, 0, 0)
+less180<-vector()
+less185<-vector()
+less190<-vector()
+less195<-vector()
+less200<-vector()
+less205<-vector()
+less210<-vector()
+more210<-vector()
+
+for(row in 1:nrow(st)){
+  height<-st[row, "height"]
+  point<-st[row, "X3P"]
+  
+  heights[row] = st[row, "height"]
+  tpp[row] = st[row, "X3P"]
+  
+  # 179-, 180 - 184, 185 - 189, 190 - 194, 194 - 200, 200 - 204, 205 - 209, 210+
+  if(height < 180){
+    n[1]<-n[1] + 1
+    sum[1]<-sum[1]+point
+    sheight[1]<-sheight[1]+height
+    less180<-c(less180, point)
+  }
+  else if(height < 185){
+    n[2]<-n[2] + 1
+    sum[2]<-sum[2]+point
+    sheight[2]<-sheight[2]+height
+    less185<-c(less185, point)
+  }
+  else if(height < 190){
+    n[3]<-n[3] + 1
+    sum[3]<-sum[3]+point
+    sheight[3]<-sheight[3]+height
+    less190<-c(less190, point)
+  }
+  else if(height < 195){
+    n[4]<-n[4] + 1
+    sum[4]<-sum[4]+point
+    sheight[4]<-sheight[4]+height
+    less195<-c(less195, point)
+  }
+  else if(height < 200){
+    n[5]<-n[5] + 1
+    sum[5]<-sum[5]+point
+    sheight[5]<-sheight[5]+height
+    less200<-c(less200, point)
+  }
+  else if(height < 204){
+    n[6]<-n[6] + 1
+    sum[6]<-sum[6]+point
+    sheight[6]<-sheight[6]+height
+    less205<-c(less205, point)
+  }
+  else if(height < 210){
+    n[7]<-n[7] + 1
+    sum[7]<-sum[7]+point
+    sheight[7]<-sheight[7]+height
+    less210<-c(less210, point)
+  }
+  else{
+    n[8]<-n[8] + 1
+    sum[8]<-sum[8] + point
+    sheight[8]<-sheight[8]+height
+    more210<-c(more210, point)
+  }
+}
+
+avg<-c(sum[1]/n[1], sum[2]/n[2], sum[3]/n[3], sum[4]/n[4], sum[5]/n[5], sum[6]/n[6], sum[7]/n[7], sum[8]/n[8])
+avgheight<-c(sheight[1]/n[1], sheight[2]/n[2], sheight[3]/n[3], sheight[4]/n[4], sheight[5]/n[5], sheight[6]/n[6], sheight[7]/n[7], sheight[8]/n[8])
+
+barplot(avg, xlab = "Range of heights (cm)", ylab = "Average 3-point shooting percentage", 
+        names.arg = c("< 179", "180-184", "185-189", "190-194", "194-200", "200-204", "205-209", "210 <"),
+        main = "Height vs Average 3-point shooting percentage",
+        space = 1.2, col = "blue")
+
+less185<-c(less185, less180)
+
+l185<-data.frame(group = "< 185", value = less185)
+l190<-data.frame(group = "< 190", value = less190)
+l195<-data.frame(group = "< 195", value = less195)
+l200<-data.frame(group = "< 200", value = less200)
+l205<-data.frame(group = "< 205", value = less205)
+l210<-data.frame(group = "< 210", value = less210)
+m210<-data.frame(group = "> 210", value = more210)
+
+boxstuff<-rbind(l185, l190, l195, l200, l205, l210, m210)
+library(ggplot2)
+ggplot(boxstuff, aes(x=group, y=value, fill=group)) + geom_boxplot()  + 
+  xlab("Height category (cm)") + 
+  ylab("Shooting Percentage") + 
+  ggtitle("Plot of shooting statistics by height") + 
+  labs(fill = "Height Categories") + 
+  theme(plot.title = element_text(size = 18, face = "bold"),
+        axis.title.x = element_text(size=14, face="bold"),
+        axis.title.y = element_text(size=14, face="bold"))
+
+```
+
+```{r}
+n1<-c(0, 0, 0, 0, 0, 0, 0, 0)
+sum1<-c(0, 0, 0, 0, 0, 0, 0, 0)
+
+for(row in 1:nrow(st)){
+  name<-st[row, "Player"]
+  height<-st[row, "height"]
+  point<-st[row, "X3PA"]
+  # 179-, 180 - 184, 185 - 189, 190 - 194, 194 - 200, 200 - 204, 205 - 209, 210+
+  
+  
+  if(height < 180){
+    n1[1]<-n1[1] + 1
+    sum1[1]<-sum1[1]+point
+  }
+  else if(height < 185){
+    n1[2]<-n1[2] + 1
+    sum1[2]<-sum1[2]+point
+  }
+  else if(height < 190){
+    n1[3]<-n1[3] + 1
+    sum1[3]<-sum1[3]+point
+  }
+  else if(height < 195){
+    n1[4]<-n1[4] + 1
+    sum1[4]<-sum1[4]+point
+  }
+  else if(height < 200){
+    n1[5]<-n1[5] + 1
+    sum1[5]<-sum1[5]+point
+  }
+  else if(height < 204){
+    n1[6]<-n1[6] + 1
+    sum1[6]<-sum1[6]+point
+  }
+  else if(height < 210){
+    n1[7]<-n1[7] + 1
+    sum1[7]<-sum1[7]+point
+  }
+  else{
+    n1[8]<-n1[8] + 1
+    sum1[8]<-sum1[8] + point
+  }
+}
+
+(avg1<-c(sum1[1]/n1[1], sum1[2]/n1[2], sum1[3]/n1[3], sum1[4]/n1[4], sum1[5]/n1[5], sum1[6]/n1[6], sum1[7]/n1[7], sum1[8]/n1[8]))
+
+barplot(avg1, xlab = "Range of heights", ylab = "Average 3-point shooting percentage", 
+        names.arg = c("< 179", "180-184", "185-189", "190-194", "194-200", "200-204", "205-209", "210 <"),
+        main = "Height vs Average 3-point shooting percentage",
+        space = 1.2)
+```
+
+```{r}
+#plot(heights, tpp)
+#pred = lm(tpp ~ heights)
+#abline(pred, col = "blue")
+
+plot(avgheight, avg, xlab = "Average height of player", ylab = "Average shooting percentage")
+predAvg = lm(avg ~ avgheight)
+abline(predAvg, col = "red")
+
+#plot(heights, resid(pred))
+
+#summary(pred)
+summary(predAvg)
+```
+
+```{r}
+numb<-(1:(max(st$height)-min(st$height)))*0
+newsum<-(1:(max(st$height)-min(st$height)))*0
+for(row in 1:nrow(st)){
+  height<-st[row, "height"]
+  point<-st[row, "X3P"]
+  
+  newsum[height - 174] = newsum[height - 174] + point
+  numb[height - 174] = numb[height - 174] + 1
+}
+x<-c(175:max(st$height))
+newavg<-newsum/numb
+plot(x, newavg, xlab = "Height of player (cm)", ylab = "Average 3-point shooting %age", main = "Scatterplot and Line of best fit of height vs. 3-point shooting percentage", col = "red", pch = 16)
+modelthis<-lm(newavg ~ x)
+abline(modelthis, col = "blue", lwd = 2)
+summary(modelthis)
+
+```
+```{r annual}
+library(readxl)
+annual<-read_excel("annual.xlsx")
+plot(annual$Season, annual$TP, xlab = "Season", ylab = "Average 3-point shots made", col = "blue", type = "l")
+
+plot(annual$Season, annual$TPA, xlab = "Season", ylab = "Average 3-point shots attempted", type = "l", col = "blue", main = "Average number of 3-point attempts per game by Season")
+
+plot(annual$Season, annual$TPp, ylab = "Average 3-point shooting percentage", type = "l", col = "red", main = "Average 3-point shooting percentage per Season")
+```
+
+```{r anova}
+ress<-aov(value~group, data = boxstuff)
+summary(ress)
+```
+
+```{r Tukey}
+TukeyHSD(ress)
+```
