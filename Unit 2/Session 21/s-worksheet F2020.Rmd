@@ -1,0 +1,42 @@
+---
+title: ''
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## s-worksheet - Extensions on the Likelihood Ratio Test
+
+1. Snell's law \index{Snell's law} tell us how light bends at an interface - the angle of incidence versus the angle of refraction - based on the ratio of the velocities of light in the two isotropic media. If the angle of incidence of a laser beam in a vacuum is $\theta_1$ radians and the angle of refraction in an unknown medium is $\theta_2$, then 
+$$n= \frac{\sin\theta_1}{\sin\theta_2}$$
+is called the **index of refraction**  ($\beta=1/n$ is the velocity of light in the medium as a fraction of the speed of light in a vacuum.) Make repeated independent measurements in radians, $\theta_{1,1}, \theta_{1,2}, \cdots, \theta_{1,16}$ of the angle of incidence in vacuum and $\theta_{2,1}, \theta_{2,2}, \cdots, \theta_{2,16}$, of the angle of refraction in the second medium. If these measurements have 
+
+* sample mean $\overline{\theta}_1=0.786$ radians and standard deviation 0.03 radians in vacuum and
+
+* sample mean $\overline{\theta}_2=0. 326$ radians and standard deviation 0.06 radians in the unknown medium.
+
+a. Snell's law gives an estimate $\hat n$ based on the values of  $\overline{\theta}_1$ and $\overline{\theta}_2$. Use the delta method to estimate the mean and standard deviation of $\hat n$.
+
+\vfill 
+b. You suspect that the substance is cubic zirconia ($n_z=2.165$) and not the claimed material, diamond ($n_d=2.418$). For the hypothesis
+$$H_0: n=n_d\quad\mbox{versus}\quad H_1:n=n_z,$$
+use the information above to devise a $z$-test for the hypothesis and report a $p$-value for the test.
+
+```{r}
+# First we need to find the z-value (Which is wrt H0) 
+# using n = 2.209 and sd = 0.0994 which we found in Part (a)
+# z = (n-n_d)/sd
+z<-(2.209 - 2.418)/0.0994
+
+# Now find the p-value using the pnorm function on z
+(p<-pnorm(z))
+```
+
+\vfill 
+c. Describe what the $p$-value communicates in this case.
+
+In this case, the p-value tells us that we can reject the hypothesis at alpha = 0.02, or the 2% level. This means that we can be 98% certain that the sample we received is not actually diamond.
+
+\vfill 
