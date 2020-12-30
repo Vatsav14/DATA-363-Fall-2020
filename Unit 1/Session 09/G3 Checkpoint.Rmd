@@ -1,0 +1,65 @@
+---
+title: "Checkpoint G3-8, H1-8,13"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Repeat the simulation and compare the values using the table command
+
+Looking at the table that is generated, we see that the number of occurences of the variable correspond to their probabilities that we determined. Although this is not exact, 1 appears roughly 32 times, 2 appears roughly 24 times, 3 appears roughly 16 times and 4 appears roughly 8 times.
+
+```{r to make sample}
+x<-c(1:4)
+f<-c(0.4, 0.3, 0.2, 0.1)
+data<-sample(x, 80, replace=TRUE, prob=f)
+table(data)
+```
+
+2. For equally likely outcomes, repeat the simulation and make a table. Describe the difference in the tabulated values.
+
+Looking at the tabulated values, we see that the number of occurences of each of the variables is approximately the same. Since there are 4 values of x, each value has a probability of 25% which is roughly 20 occurences. We see that the number of occurences for each of the values of x is approximately 20.
+
+```{r to make sample for equally likely outcomes}
+x<-c(1:4)
+data<-sample(x, 80, replace=TRUE)
+table(data)
+```
+
+3. Simulate 80 observations of a fair die and make a table.
+
+```{r for fair die roll}
+die<-c(1:6)
+data_fair<-sample(die, 80, replace=TRUE)
+table(data_fair)
+```
+
+4. Simulate 80 observations of an unfair die and make a table.
+
+```{r for unfair die roll}
+die<-c(1:6)
+uf<-c(1/12, 1/12, 1/12, 1/4, 1/4, 1/4)
+data_unfair<-sample(die, 80, replace=TRUE, prob=uf)
+table(data_unfair)
+```
+
+5. Compute the mean and the standard deviation for the observations. Describe the differences int he tabulated values for the fair and unfair die.
+
+In the data for the fair die, we see that each value of x occurs roughly an equal number of times, i.e. 1/6th of 80 times, which is roughly 13 times. That is, the distribution of the number of occurrences of each of the values of x is fairly even. This is because the probability of getting either one of the values of x is the same.
+
+In the data for the unfair die, the number of occurrences of each of the values of x is not evenly distributed. This is because as per the probabilities of occurrences of x given to us, it is more likely to roll a 4, 5, or a 6 compared to 1, 2, and 3. This is because their probability of being rolled is higher. Therefore, we can explain the different observations when we compare the fair and unfair die rolls.
+
+```{r mean and sd}
+mean_fair<-mean(data_fair)
+mean_unfair<-mean(data_unfair)
+sd_fair<-sd(data_fair)
+sd_unfair<-sd(data_unfair)
+
+cat("Fair die: Mean = ", mean_fair, " Standard deviation = ", sd_fair, "\n")
+cat("Unfair die: Mean = ", mean_unfair, " Standard deviation = ", sd_unfair)
+```
+
