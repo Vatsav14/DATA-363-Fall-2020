@@ -1,0 +1,54 @@
+---
+title: "R2S1Chpt"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+R2-6
+
+```{r}
+N0<-4500
+t<-400
+N<-4000
+
+# For part 1 where k is constant and the values of alpha are different
+k<-800
+alpha<-c(0.05, 0.02, 0.01)
+ralpha<-qhyper(1-alpha, t, N0-t, k)
+
+# Type II errors in the first part
+(power<- (1-phyper(ralpha, t, N-t, k)))
+
+# For part 2 where the value of alpha is constant and the values of k are changing
+k<-c(600, 800, 1000)
+alpha<-0.05
+ralpha<-qhyper(1-alpha, t, N0-t, k)
+
+# Type II errors for the second part
+(power<-(1-phyper(ralpha, t, N-t, k)))
+```
+
+R2-8
+
+```{r}
+z<-(250-336*0.7)/sqrt(336*0.7*0.3)
+((1-pnorm(abs(z), 0, 1) + pnorm(-abs(z), 0, 1)))
+```
+
+Now this means each of the tails have an area of 3.9%. Since both of them exceed 2.5% at the tails, we fail to reject the hypothesis
+
+
+S1-8
+
+To reject the hypothesis, the p-value needs to be less than the percentage that we are given. To calculate the p-value:
+
+```{r}
+pbinom(20, 36, 0.7)
+```
+
+Since the p value is less than 0.05, we can reject the hypothesis at the 5% level, but since it is greater than 0.01, we fail to reject it at the 1% level.
