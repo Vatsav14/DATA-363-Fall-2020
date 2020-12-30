@@ -1,0 +1,42 @@
+---
+title: "D2Checkpoint"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+The probability of a woman being selected out of the given sample space is 1/3. Therefore, on average, there might be 8 women in a sample space of 24
+
+```{r 10 samples}
+population<-c(1:60)
+(subjects1<-sample(population, 24))
+(subjects2<-sample(population, 24))
+(subjects3<-sample(population, 24))
+(subjects4<-sample(population, 24))
+(subjects5<-sample(population, 24))
+(subjects6<-sample(population, 24))
+(subjects7<-sample(population, 24))
+(subjects8<-sample(population, 24))
+(subjects9<-sample(population, 24))
+(subjects10<-sample(population, 24))
+```
+
+
+```{r women mean and std}
+women<-c(8, 7, 10, 10, 6, 8, 8, 5, 7, 8, 9)
+mean(women)
+sd(women)
+```
+ This number lies quite close to the original estimate of approximately 8 women in our selected sample.
+ 
+```{r stratified random sample}
+strat_men<-c(sample(population[1:20], 12))
+strat_women<-c(sample(population[21:60], 12))
+(strat = c(strat_women, strat_men))
+```
+Here we can see that out of our population size, we have managed to select an equal number of men and women despite the lower number of women compared to men. This shows that the study we are planning to use this data for is not biased with respect to gender.
