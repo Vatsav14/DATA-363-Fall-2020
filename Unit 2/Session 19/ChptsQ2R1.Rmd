@@ -1,0 +1,31 @@
+---
+title: "Chpts Q2R1"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Q2-9:
+
+As mu_1 - mu_0 increases, it becomes much easier to distinguish between the 2 curves, meaning the power is much higher
+
+Increasing the variance in the data means that the standard deviation would also increase. Now since the z value is inversely proportional to the standard deviation, this means that the z score would become much lower. Therefore, it would make it much easier to reject the null hypothesis since the probability to getting a value higher than z is higher. Therefore, since we can reject the null hypothesis eassier, this means that the power of the distribution decreases.
+
+The power increases as a function of n (sample size) because as we increase the size of the sample, the distribution of the data around the mean decreases, that is, the data is less spread out. Now as a result of this, the value of z increases because it is directly proportional to the square root of the sample size. Therefore, since we have a higher z score, we will be less likely to reject the null hypothesis, meaning our power will increase.
+
+R1-10:
+
+Critical value $k_{\alpha} = \mu_0 + z_\alpha(\sigma_0/\sqrt n)$, where z_alpha value of p when z = 0.05
+
+$k_{\alpha} =$ 10 - 1.64(using table for z = 0.05) * 3/4 = 8.77 cm.
+
+```{r plot}
+mu0 <- 10; sigma0 <- 3; n <- 16; mu <- seq(0, 17, 0.01)
+zalpha <- qnorm(0.05)
+pi <- 1 - pnorm(zalpha - (mu - mu0)/(sigma0/(n^(1/2))))
+plot(mu, pi, type = "l", col = "red")
+```
