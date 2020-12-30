@@ -1,0 +1,64 @@
+---
+title: "I1I2Checkpoint"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Checkpoint I1:
+
+In the graphs we get from the following commands, we see that as the probability of successes increases, the number of successes that we get increases. For example, when the probability of success is 0.25, we see that most of the total number of successes we have are in the 1 - 4 range, whereas as we increase the value of p, we see that the total number of successes is highest in the 4 - 8 range for p = 0.5 and in the 8 - 11 range for p = 0.75. This simply shows that as we increase the probability of success, we get a larger number of successes from our trials.
+
+
+```{r}
+plot(c(0:12), dbinom(c(0:12), 12, 0.25), type="h")
+plot(c(0:12), dbinom(c(0:12), 12, 0.5), type="h")
+plot(c(0:12), dbinom(c(0:12), 12, 0.75), type="h")
+```
+
+Checkpoint I2: 
+
+Part 1: Find P{X=x} for x= 0,1,2,3,4,5 for a Bin(5,3/7) random variable
+
+```{r}
+cat("Bin(5, 3/7) for x = 0: ", dbinom(0, size=5, prob=3/7), "\n")
+cat("Bin(5, 3/7) for x = 1: ", dbinom(1, size=5, prob=3/7), "\n")
+cat("Bin(5, 3/7) for x = 2: ", dbinom(2, size=5, prob=3/7), "\n")
+cat("Bin(5, 3/7) for x = 3: ", dbinom(3, size=5, prob=3/7), "\n")
+cat("Bin(5, 3/7) for x = 4: ", dbinom(4, size=5, prob=3/7), "\n")
+cat("Bin(5, 3/7) for x = 5: ", dbinom(5, size=5, prob=3/7), "\n")
+```
+
+
+Part 2: Find the first and third quartiles as well as the median for a Beta(3,3) random variables
+
+```{r}
+cat("First Quartile: ", qbeta(1/4, shape1=3, shape2=3), "\n")
+cat("Median: ", qbeta(1/2, shape1=3, shape2=3), "\n")
+cat("Third Quartile: ", qbeta(3/4, shape1=3, shape2=3), "\n")
+```
+
+
+Part 3: Find P{X<=x} for x = 0,1,2,3 for a chisq(2) variable
+
+```{r}
+cat("P{X <= 0} for chisq(2): ", pchisq(0, df=2), "\n")
+cat("P{X <= 1} for chisq(2): ", pchisq(1, df=2), "\n")
+cat("P{X <= 2} for chisq(2): ", pchisq(2, df=2), "\n")
+cat("P{X <= 3} for chisq(2): ", pchisq(3, df=2), "\n")
+```
+
+
+Part 4: Simulate 80 Pois(5) random variable. Find the mean and variance of these simulated values
+
+```{r}
+c<-rpois(80, lambda = 5) # Simulating 80 poisson values
+table(c)
+cat("\n\nMean for 80 simulated Poisson values: ", mean(c), "\n")
+cat("Variance for 80 simulated values: ", var(c), "\n")
+```

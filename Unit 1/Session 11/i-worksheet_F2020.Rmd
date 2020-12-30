@@ -1,0 +1,61 @@
+---
+title: ''
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## i-worksheet:  Examples of Mass Functions and Densities
+
+1.  In this problem, we shall use **R** to calculate probabilities and quantiles for random variables.
+
+(a) For $Z$ a standard normal, find values for $z$ so that $P\{Z\le z\}= 0.01, 0.05, 0.25, 0.50, 0.75, 0.95, 0.99.$. Indicate these values on a plot of the distribution function for $Z$.
+
+```{r}
+quarts<-c(0.01, 0.05, 0.25, 0.50, 0.75, 0.95, 0.99)
+z<-qnorm(quarts)
+
+curve(pnorm(x),
+      from = -3,
+      to = 3,
+      xlab = "Values of x",
+      ylab = "Cumulative probability")
+
+points(z, quarts, pch = 21, bg = "blue")
+
+```
+
+(b) For $X$ a $\chi^2_4$ random variable find values for $x$ so that $P\{X> x\}=0.10,0.05,0.01$. Indicate these values on a plot of the density function for $X$.
+
+```{r}
+prob<-c(0.10, 0.05, 0.01) # Storing the values of x that we need
+
+qvals<-qchisq(1-prob, df=4) # We are doing 1 - the values because we need X > x but we have X <= x
+
+curve(dchisq(x, df=4), 0, 25, 
+      main = "Chi-sq density function", 
+      xlab = "Value of x", 
+      ylab = "Probability density")
+
+points(qvals, dchisq(qvals, df=4), pch=21, bg="blue")
+
+```
+
+(c) Simulate 1000 independent beta random variables with $\alpha=2$ and $\beta = 4$. Find the mean and variance of this sample and compare it to the distributional mean and variance:
+$$
+\displaystyle E[X] = \frac{\alpha}{\alpha + \beta}, var(X) = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+$$
+```{r}
+sim<-rbeta(1000, 2, 4)
+mean(sim)
+var(sim)
+```
+Now when we substitute the value of alpha and beta into the given equations for the mean and variance, we get:
+
+Mean = 2/(2+4) = 1/3 = 0.33333 which we see is roughly equal to the value we got from our simulation
+
+Variance = (2x4)/(2+4)^2 x (2 + 4 + 1) = 8/252 = 0.031746 which we see is roughly the same as the value we got from our simulation
+
+
