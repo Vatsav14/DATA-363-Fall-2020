@@ -1,0 +1,27 @@
+---
+title: "V1V2Chpt"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+V1-7:
+
+The grand mean is the weighted average of all the $y_j$ taken with the weights $n_j$. Using the values given in V-4, we get:
+
+Grand Mean = $\frac{1}{33} * (12 * 23.75 + 12 + 14.083 + 9 * 15.778) = 595.998/33 = 18.06054$
+
+Therefore, we have shown that the Grand Mean is equal to the required value.
+
+
+V2-8:
+
+```{r}
+2 * pt(-0.7344, 30)
+```
+
+Since this p-value is considerably high, we would reject the null hypothesis at many of the conventional significance levels.
