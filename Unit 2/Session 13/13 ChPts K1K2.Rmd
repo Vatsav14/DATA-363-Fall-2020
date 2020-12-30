@@ -1,0 +1,56 @@
+---
+title: ''
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 13 ChPts K1K2
+
+## K1.14
+![](K1.14.png)
+```{r}
+(z<-(7-25)/sqrt(75/4))
+pnorm(z)
+pbinom(7, size=100, prob=1/4)
+```
+
+\newpage
+## K1.16
+![](K1.16.png)
+```{r}
+qnorm(0.95, 300*450, 50*sqrt(300))
+```
+Therefore, we need about 136.4 megabytes.
+
+
+\newpage
+# Intro to Propatation of Error/Delta Method
+
+We're going to motivate propagation of error and the delta method by comparing the distribution of outputs of $g(x) = x^2$ to those of the linearization of $g(x)$ about x = 1, $\hat g(x) = 1^2 + 2(1)(x-1) = 2x-1$.
+
+1.  Simulate 1000 uniformly distributed variables between 0.9 and 1.1 and apply $g(x)$ and $\hat g(x)$.  How do their means compare?  How do their standard deviations compare?
+
+In this case, the means and the standard deviations are quite similar. We can see that the mean is the same up to 2 decimal points. In the case of the standard deviation, the value is a bit high as compared to the standard deviations that we get using rnorm. These too are similar upto atleast 3 decimal points.
+
+```{r uniform}
+x <- runif(1000,0.9,1.1)
+g_nonlinear <- x^2  # type in g(x) here
+g_linear <-  2*x-1 # type in hat g(x) here
+mean(g_nonlinear); mean(g_linear)
+sd(g_nonlinear); sd(g_linear)
+```
+
+2.  Simulate 1000 normally distributed variables with a mean of 1 and a SD of $0.2/\sqrt{25\cdot 12}$ and apply $g(x)$ and $\hat g(x)$.  How do their means compare?  How do their standard deviations compare?
+
+Over here, we see that the means are much closer to each other compared to the previous example. They reach up to 4 digits after the decimal point of similarity. Here, we can also observe that the standard deviation is a magnitude of 10 lower when compared to the standard deviation in the previous example. Also, their values are similar upto 5 digits after the decimal point.
+
+```{r normal}
+x <- rnorm(1000,1,0.2/sqrt(40*12))
+g_nonlinear <- x^2  # type in g(x) here
+g_linear <-  2*x-1 # type in hat g(x) here
+mean(g_nonlinear); mean(g_linear)
+sd(g_nonlinear); sd(g_linear)
+```
